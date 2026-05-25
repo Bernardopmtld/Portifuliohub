@@ -3,82 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="PortfolioHUB - Portfólio automatizado de Bernardo com projetos sincronizados do GitHub em tempo real">
-    <meta name="theme-color" content="#0f172a">
+    <meta name="description" content="PortfolioHUB de Bernardo: projetos, tecnologias e repositórios sincronizados com o GitHub.">
+    <meta name="theme-color" content="#f7f8fb">
     <meta name="author" content="Bernardo">
-    
-    <!-- Open Graph / Social Media -->
+
     <meta property="og:type" content="website">
-    <meta property="og:title" content="PortfolioHUB - Meu Portfólio Automatizado">
-    <meta property="og:description" content="Portfólio automatizado com projetos sincronizados do GitHub em tempo real">
+    <meta property="og:title" content="PortfolioHUB | Bernardo">
+    <meta property="og:description" content="Portfólio profissional com projetos sincronizados do GitHub.">
     <meta property="og:url" content="https://bernardopmtld.github.io/Portifuliohub/">
-    
-    <title>PortfolioHUB - Meu Portfólio Automatizado</title>
-    
-    <!-- Preconnect to external resources for performance -->
+
+    <title>PortfolioHUB | Bernardo</title>
+
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="https://api.github.com">
-    
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2Z5l+qzxgS0Kp9JfMvF2L87x4eZkM+ZAlNaWerKGUP+0XlseYeF7yJNsyiVVISowoj4A==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Skip to main content link for accessibility -->
-    <a href="#projetos" class="skip-link">Pular para conteúdo principal</a>
+    <a href="#projetos" class="skip-link">Pular para os projetos</a>
 
-    <header class="navbar" role="banner">
-        <div class="logo" aria-label="PortfolioHUB Logo">
-            <i class="fa-solid fa-cubes-split" aria-hidden="true"></i> Portfolio<span>HUB</span>
-        </div>
-        <nav aria-label="Navegação Principal">
-            <a href="#perfil" title="Ir para seção Sobre">Sobre</a>
-            <a href="#projetos" title="Ir para seção Projetos">Projetos</a>
+    <header class="site-header">
+        <a class="brand" href="#top" aria-label="PortfolioHUB">
+            <span class="brand-mark"><i class="fa-solid fa-layer-group" aria-hidden="true"></i></span>
+            <span>Portfolio<span>HUB</span></span>
+        </a>
+
+        <nav class="site-nav" aria-label="Navegação principal">
+            <a href="#perfil">Perfil</a>
+            <a href="#projetos">Projetos</a>
+            <a href="https://github.com/Bernardopmtld" target="_blank" rel="noopener noreferrer">GitHub</a>
         </nav>
     </header>
 
-    <section id="perfil" class="profile-section" aria-labelledby="profile-title">
-        <div class="profile-container">
-            <div class="profile-bio">
-                <img id="profile-avatar" src="" alt="Foto de perfil de Bernardo" class="profile-avatar" style="display: none;">
-                
-                <h1 id="profile-title">Olá, eu sou o Bernardo</h1>
-                <p class="subtitle">Estudante de Ciência da Computação</p>
-                <p class="description">
-                    Bem-vindo ao meu PortfolioHUB. Esta plataforma foi desenvolvida para centralizar 
-                    e exibir de forma automatizada os meus principais projetos acadêmicos e pessoais, 
-                    consumindo dados diretamente da API do GitHub.
-                </p>
-                <div class="profile-badges" aria-label="Tecnologias">
-                    <span title="Python"><i class="fa-brands fa-python" aria-hidden="true"></i> Python</span>
-                    <span title="Java"><i class="fa-brands fa-java" aria-hidden="true"></i> Java</span>
-                    <span title="Git"><i class="fa-brands fa-git-alt" aria-hidden="true"></i> Git</span>
+    <main id="top">
+        <section id="perfil" class="hero-section" aria-labelledby="profile-title">
+            <div class="hero-content">
+                <div class="profile-card">
+                    <div class="avatar-wrap">
+                        <img id="profile-avatar" class="profile-avatar" src="https://avatars.githubusercontent.com/u/86485565?v=4" alt="Foto de perfil de Bernardo">
+                    </div>
+                    <div>
+                        <p class="eyebrow">Portfólio de desenvolvimento</p>
+                        <h1 id="profile-title">Bernardo</h1>
+                        <p id="profile-bio" class="profile-summary">Estudante de Ciência da Computação criando projetos web, automações e soluções com dados reais.</p>
+                    </div>
+                </div>
+
+                <div class="hero-copy">
+                    <p class="section-kicker">GitHub Pages + API GitHub</p>
+                    <h2>Projetos apresentados com clareza, contexto e atualização automática.</h2>
+                    <p>
+                        Este hub reúne repositórios públicos, tecnologias usadas e links diretos para o código.
+                        A página foi pensada para ser objetiva para recrutadores, professores e parceiros técnicos.
+                    </p>
+
+                    <div id="profile-stats" class="stats-grid" aria-label="Resumo do perfil">
+                        <div>
+                            <strong data-stat="repos">--</strong>
+                            <span>Repositórios</span>
+                        </div>
+                        <div>
+                            <strong data-stat="followers">--</strong>
+                            <span>Seguidores</span>
+                        </div>
+                        <div>
+                            <strong data-stat="updated">2026</strong>
+                            <span>Atualizado</span>
+                        </div>
+                    </div>
+
+                    <div class="hero-actions">
+                        <a class="button primary" href="#projetos">
+                            <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
+                            Ver projetos
+                        </a>
+                        <a class="button secondary" href="https://github.com/Bernardopmtld" target="_blank" rel="noopener noreferrer">
+                            <i class="fa-brands fa-github" aria-hidden="true"></i>
+                            Perfil GitHub
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <main id="projetos" class="projects-section" role="main">
-        <div class="section-title">
-            <h2>Repositórios em Destaque</h2>
-            <p>Projetos sincronizados em tempo real com o GitHub</p>
-        </div>
+        <section class="skills-section" aria-labelledby="skills-title">
+            <div class="section-heading">
+                <p class="section-kicker">Competências</p>
+                <h2 id="skills-title">Stack em evolução constante</h2>
+            </div>
+            <div class="skill-list" aria-label="Tecnologias">
+                <span><i class="fa-brands fa-html5" aria-hidden="true"></i> HTML</span>
+                <span><i class="fa-brands fa-css3-alt" aria-hidden="true"></i> CSS</span>
+                <span><i class="fa-brands fa-js" aria-hidden="true"></i> JavaScript</span>
+                <span><i class="fa-brands fa-python" aria-hidden="true"></i> Python</span>
+                <span><i class="fa-brands fa-java" aria-hidden="true"></i> Java</span>
+                <span><i class="fa-brands fa-git-alt" aria-hidden="true"></i> Git</span>
+            </div>
+        </section>
 
-        <div id="loading" class="loading" role="status" aria-live="polite">
-            <i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> Buscando projetos no GitHub...
-        </div>
+        <section id="projetos" class="projects-section" aria-labelledby="projects-title">
+            <div class="section-heading">
+                <p class="section-kicker">Projetos</p>
+                <h2 id="projects-title">Repositórios em destaque</h2>
+                <p>Cards gerados automaticamente a partir dos repositórios públicos mais recentes.</p>
+            </div>
 
-        <div id="projects-container" class="projects-grid" role="list"></div>
+            <div id="loading" class="status-message" role="status" aria-live="polite">
+                <i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>
+                Buscando projetos no GitHub...
+            </div>
+
+            <div id="projects-container" class="projects-grid" role="list"></div>
+        </section>
     </main>
 
-    <footer class="footer" role="contentinfo">
-        <div class="footer-content">
-            <p>&copy; 2026 PortfolioHUB. Desenvolvido com HTML, CSS e JavaScript.</p>
-            <nav class="footer-links" aria-label="Links Sociais">
-                <a href="https://github.com/Bernardopmtld" title="Perfil GitHub" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-brands fa-github" aria-hidden="true"></i><span class="sr-only">GitHub</span>
-                </a>
-            </nav>
-        </div>
+    <footer class="site-footer">
+        <p>© 2026 PortfolioHUB. Desenvolvido por Bernardo com HTML, CSS e JavaScript.</p>
+        <a href="https://github.com/Bernardopmtld/Portifuliohub" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-github" aria-hidden="true"></i>
+            Repositório do site
+        </a>
     </footer>
 
     <script src="js/app.js" defer></script>
