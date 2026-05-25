@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PortfolioHUB - Meu Portfólio Automatizado</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo">
+            <i class="fa-solid fa-cubes-split"></i> Portfolio<span>HUB</span>
+        </div>
+        <nav>
+            <a href="#perfil">Sobre</a>
+            <a href="#projetos">Projetos</a>
+        </nav>
+    </header>
+
+    <section id="perfil" class="profile-section">
+        <div class="profile-container">
+            <div class="profile-bio">
+                <h1>Olá, eu sou o Bernardo</h1>
+                <p class="subtitle">Estudante de Ciência da Computação</p>
+                <p class="description">
+                    Bem-vindo ao meu PortfolioHUB. Esta plataforma foi desenvolvida para centralizar 
+                    e exibir de forma automatizada os meus principais projetos acadêmicos e pessoais, 
+                    consumindo dados diretamente da API do GitHub.
+                </p>
+                <div class="profile-badges">
+                    <span><i class="fa-brands fa-python"></i> Python</span>
+                    <span><i class="fa-brands fa-java"></i> Java</span>
+                    <span><i class="fa-brands fa-git-alt"></i> Git</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main id="projetos" class="projects-section">
+        <div class="section-title">
+            <h2>Repositórios em Destaque</h2>
+            <p>Projetos sincronizados em tempo real com o GitHub</p>
+        </div>
+
+        <div id="loading" class="loading">
+            <i class="fa-solid fa-spinner fa-spin"></i> Buscando projetos no GitHub...
+        </div>
+
+        <div id="projects-container" class="projects-grid"></div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 PortfolioHUB. Desenvolvido com HTML, CSS e JavaScript.</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
