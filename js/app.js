@@ -21,6 +21,16 @@ async function fetchGitHubRepositories() {
 
         const repositories = await response.json();
 
+        // Puxa a foto de perfil do dono do primeiro repositório encontrado
+        if (repositories.length > 0) {
+            const avatarUrl = repositories[0].owner.avatar_url;
+            const avatarImg = document.getElementById("profile-avatar");
+            if (avatarImg) {
+                avatarImg.src = avatarUrl;
+                avatarImg.style.display = "block"; // Torna a imagem visível
+            }
+        }
+
         // Esconde o elemento de loading
         loadingElement.style.display = "none";
 
