@@ -1,5 +1,54 @@
 const GITHUB_USERNAME = "Bernardopmtld";
 const MAX_PROJECTS = 9;
+const FALLBACK_PROJECTS = [
+    {
+        name: "Portifuliohub",
+        description: "Plataforma centralizada para exibição e gerenciamento de projetos e portfólios digitais, integrada com a API do GitHub.",
+        language: "CSS",
+        html_url: "https://github.com/Bernardopmtld/Portifuliohub",
+        updated_at: "2026-05-25T00:00:00Z"
+    },
+    {
+        name: "equitrackervercel",
+        description: "Aplicação web para acompanhamento de dados e organização de informações em tempo real.",
+        language: "JavaScript",
+        html_url: "https://github.com/Bernardopmtld/equitrackervercel",
+        updated_at: "2026-05-24T00:00:00Z"
+    },
+    {
+        name: "equitracker",
+        description: "Projeto em JavaScript focado em monitoramento, controle e visualização de registros.",
+        language: "JavaScript",
+        html_url: "https://github.com/Bernardopmtld/equitracker",
+        updated_at: "2026-05-22T00:00:00Z"
+    },
+    {
+        name: "Personalportfoliowebsite",
+        description: "Portfólio pessoal desenvolvido para apresentar experiência, projetos e presença profissional.",
+        language: "TypeScript",
+        html_url: "https://github.com/Bernardopmtld/Personalportfoliowebsite",
+        updated_at: "2026-05-14T00:00:00Z"
+    },
+    {
+        name: "flappy-bird-python",
+        description: "Clone minimalista de Flappy Bird feito com Python e Pygame, sem depender de assets externos.",
+        language: "Python",
+        html_url: "https://github.com/Bernardopmtld/flappy-bird-python",
+        updated_at: "2026-05-08T00:00:00Z"
+    },
+    {
+        name: "Bernardopmtld",
+        description: "Repositório de perfil com informações e experimentos do ecossistema GitHub.",
+        language: "Python",
+        html_url: "https://github.com/Bernardopmtld/Bernardopmtld",
+        updated_at: "2026-04-05T00:00:00Z"
+    }
+];
+const FALLBACK_PROFILE = {
+    public_repos: FALLBACK_PROJECTS.length,
+    followers: 1,
+    updated_at: "2026-05-25T00:00:00Z"
+};
 
 document.addEventListener("DOMContentLoaded", () => {
     loadPortfolio();
@@ -10,17 +59,18 @@ async function loadPortfolio() {
     const loadingElement = document.getElementById("loading");
 
     try {
-        const [profile, repositories] = await Promise.all([
+        const [profileResult, repositoriesResult] = await Promise.allSettled([
             fetchJson(`https://api.github.com/users/${GITHUB_USERNAME}`),
             fetchJson(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`)
         ]);
 
-        renderProfile(profile);
+        renderProfile(profileResult.status === "fulfilled" ? profileResult.value : FALLBACK_PROFILE);
 
-        const projects = repositories
-            .filter((repo) => !repo.fork)
-            .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
-            .slice(0, MAX_PROJECTS);
+        const repositories = repositoriesResult.status === "fulfilled"
+            ? repositoriesResult.value
+            : FALLBACK_PROJECTS;
+
+        const projects = normalizeProjects(repositories);
 
         loadingElement.hidden = true;
         projectsContainer.innerHTML = "";
@@ -36,12 +86,7 @@ async function loadPortfolio() {
     } catch (error) {
         console.error("Erro ao carregar dados do GitHub:", error);
         loadingElement.hidden = true;
-        projectsContainer.innerHTML = `
-            <div class="error-message">
-                <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
-                Não foi possível carregar os projetos agora. Tente novamente em alguns instantes.
-            </div>
-        `;
+        renderFallbackProjects(projectsContainer);
     }
 }
 
@@ -60,15 +105,10 @@ async function fetchJson(url) {
 }
 
 function renderProfile(profile) {
-    const avatar = document.getElementById("profile-avatar");
     const bio = document.getElementById("profile-bio");
     const reposStat = document.querySelector('[data-stat="repos"]');
     const followersStat = document.querySelector('[data-stat="followers"]');
     const updatedStat = document.querySelector('[data-stat="updated"]');
-
-    if (avatar && profile.avatar_url) {
-        avatar.src = profile.avatar_url;
-    }
 
     if (bio && profile.bio) {
         bio.textContent = profile.bio;
@@ -88,6 +128,20 @@ function renderProfile(profile) {
             year: "numeric"
         }).format(new Date(profile.updated_at));
     }
+}
+
+function normalizeProjects(repositories) {
+    return repositories
+        .filter((repo) => !repo.fork)
+        .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
+        .slice(0, MAX_PROJECTS);
+}
+
+function renderFallbackProjects(container) {
+    container.innerHTML = "";
+    normalizeProjects(FALLBACK_PROJECTS).forEach((repo) => {
+        container.insertAdjacentHTML("beforeend", createProjectCard(repo));
+    });
 }
 
 function createProjectCard(repo) {
