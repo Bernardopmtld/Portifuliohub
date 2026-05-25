@@ -100,6 +100,17 @@ body {
     color: var(--texto-principal);
 }
 
+/* Estilização da Foto de Perfil do GitHub */
+.profile-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid var(--cor-accent);
+    margin-bottom: 1.5rem;
+    object-fit: cover;
+    box-shadow: 0 4px 20px rgba(56, 189, 248, 0.2);
+}
+
 /* Seção de Projetos */
 .projects-section {
     padding: 4rem 10%;
