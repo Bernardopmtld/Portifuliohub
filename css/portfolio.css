@@ -125,6 +125,9 @@ a {
 
 .profile-card,
 .hero-copy,
+.quick-link,
+.info-card,
+.detail-item,
 .project-card {
     background: var(--surface);
     border: 1px solid var(--line);
@@ -247,6 +250,59 @@ a {
     gap: 0.85rem;
 }
 
+.quick-links {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: 1.25rem auto 0;
+    max-width: 1180px;
+}
+
+.quick-link {
+    align-items: center;
+    color: var(--ink);
+    display: flex;
+    gap: 0.9rem;
+    min-height: 6rem;
+    padding: 1rem;
+    text-decoration: none;
+}
+
+.quick-link i {
+    align-items: center;
+    background: var(--teal-soft);
+    border-radius: 8px;
+    color: var(--teal);
+    display: inline-flex;
+    flex: 0 0 2.6rem;
+    font-size: 1.1rem;
+    height: 2.6rem;
+    justify-content: center;
+    width: 2.6rem;
+}
+
+.quick-link strong,
+.quick-link small {
+    display: block;
+}
+
+.quick-link small {
+    color: var(--muted);
+    font-weight: 700;
+    margin-top: 0.15rem;
+}
+
+.quick-link:not(.muted-link):hover,
+.quick-link:not(.muted-link):focus {
+    border-color: var(--teal);
+    transform: translateY(-2px);
+}
+
+.muted-link {
+    box-shadow: none;
+    opacity: 0.78;
+}
+
 .button {
     align-items: center;
     border-radius: 8px;
@@ -268,7 +324,10 @@ a {
     color: var(--teal);
 }
 
+.summary-section,
+.education-section,
 .skills-section,
+.contact-section,
 .projects-section {
     margin: 0 auto;
     max-width: 1180px;
@@ -290,6 +349,41 @@ a {
     margin-top: 0.45rem;
 }
 
+.details-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.detail-item {
+    align-items: flex-start;
+    box-shadow: none;
+    display: flex;
+    gap: 0.85rem;
+    padding: 1rem;
+}
+
+.detail-item i {
+    align-items: center;
+    background: var(--coral-soft);
+    border-radius: 8px;
+    color: var(--coral);
+    display: inline-flex;
+    flex: 0 0 2.4rem;
+    height: 2.4rem;
+    justify-content: center;
+    width: 2.4rem;
+}
+
+.detail-item strong {
+    display: block;
+}
+
+.detail-item span {
+    color: var(--muted);
+    font-weight: 700;
+}
+
 .skill-list {
     display: flex;
     flex-wrap: wrap;
@@ -309,6 +403,37 @@ a {
 
 .skill-list i {
     color: var(--teal);
+}
+
+.abilities-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: 1.4rem;
+}
+
+.info-card {
+    box-shadow: none;
+    padding: 1.25rem;
+}
+
+.info-card h3 {
+    font-size: 1.15rem;
+    line-height: 1.2;
+    margin-bottom: 0.8rem;
+}
+
+.info-card ul {
+    color: var(--muted);
+    display: grid;
+    gap: 0.45rem;
+    list-style-position: inside;
+}
+
+.contact-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
 }
 
 .projects-grid {
@@ -448,6 +573,9 @@ a {
 
 @media (max-width: 920px) {
     .hero-content,
+    .quick-links,
+    .abilities-grid,
+    .details-grid,
     .projects-grid {
         grid-template-columns: 1fr;
     }

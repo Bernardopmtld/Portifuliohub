@@ -1,9 +1,21 @@
 const GITHUB_USERNAME = "Bernardopmtld";
 const MAX_PROJECTS = 9;
+const PERSONAL_BIO = "Estudante de Ciência da Computação em Brasília, focado em Python, lógica computacional e arquitetura de sistemas.";
+const FEATURED_PROJECTS = [
+    {
+        name: "equitrack",
+        description: "Projeto em destaque do meu portfólio, criado para praticar organização, acompanhamento de dados e construção de aplicações web.",
+        language: "JavaScript",
+        html_url: "https://github.com/Bernardopmtld/equitrack",
+        updated_at: "2026-06-12T00:00:00Z",
+        featured: true
+    }
+];
 const FALLBACK_PROJECTS = [
+    ...FEATURED_PROJECTS,
     {
         name: "Portifuliohub",
-        description: "Plataforma centralizada para exibição e gerenciamento de projetos e portfólios digitais, integrada com a API do GitHub.",
+        description: "Meu portfólio pessoal, criado para apresentar estudos, tecnologias e projetos públicos do GitHub.",
         language: "CSS",
         html_url: "https://github.com/Bernardopmtld/Portifuliohub",
         updated_at: "2026-05-25T00:00:00Z"
@@ -14,13 +26,6 @@ const FALLBACK_PROJECTS = [
         language: "JavaScript",
         html_url: "https://github.com/Bernardopmtld/equitrackervercel",
         updated_at: "2026-05-24T00:00:00Z"
-    },
-    {
-        name: "equitracker",
-        description: "Projeto em JavaScript focado em monitoramento, controle e visualização de registros.",
-        language: "JavaScript",
-        html_url: "https://github.com/Bernardopmtld/equitracker",
-        updated_at: "2026-05-22T00:00:00Z"
     },
     {
         name: "Personalportfoliowebsite",
@@ -110,8 +115,8 @@ function renderProfile(profile) {
     const followersStat = document.querySelector('[data-stat="followers"]');
     const updatedStat = document.querySelector('[data-stat="updated"]');
 
-    if (bio && profile.bio) {
-        bio.textContent = profile.bio;
+    if (bio) {
+        bio.textContent = PERSONAL_BIO;
     }
 
     if (reposStat) {
@@ -131,9 +136,26 @@ function renderProfile(profile) {
 }
 
 function normalizeProjects(repositories) {
-    return repositories
+    const repositoriesByName = new Map(
+        repositories
+            .filter((repo) => !repo.fork)
+            .map((repo) => [repo.name.toLowerCase(), repo])
+    );
+
+    FEATURED_PROJECTS.forEach((project) => {
+        const key = project.name.toLowerCase();
+        repositoriesByName.set(key, {
+            ...project,
+            ...repositoriesByName.get(key),
+            featured: true,
+            description: repositoriesByName.get(key)?.description || project.description,
+            html_url: project.html_url
+        });
+    });
+
+    return Array.from(repositoriesByName.values())
         .filter((repo) => !repo.fork)
-        .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
+        .sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)) || new Date(b.updated_at) - new Date(a.updated_at))
         .slice(0, MAX_PROJECTS);
 }
 
@@ -146,7 +168,7 @@ function renderFallbackProjects(container) {
 
 function createProjectCard(repo) {
     const description = repo.description || "Projeto público disponível no GitHub para consulta, evolução e acompanhamento.";
-    const language = repo.language || "Repositório";
+    const language = repo.featured ? "Destaque" : repo.language || "Repositório";
     const updatedAt = new Intl.DateTimeFormat("pt-BR", {
         day: "2-digit",
         month: "short",
